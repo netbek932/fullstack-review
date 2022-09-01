@@ -3,7 +3,7 @@ mongoose.connect('mongodb://localhost/fetcher');
 
 let repoSchema = mongoose.Schema({
   // TODO: your schema here!
-  repo_id: Number,
+  repo_id: {type: Number, unique: true},
   repo_url: String,
   repo_name: String,
   owner_id: Number,
