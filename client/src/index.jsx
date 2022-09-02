@@ -15,21 +15,22 @@ class App extends React.Component {
 
   search (term) {
     console.log(`${term} was searched`);
-    // TODO
-    //console.log(JSON.stringify(term))
+
     $.ajax({
       url: '/repos',
       type: 'POST',
-      data: {term},
-      //dataType: 'json',
-      // success: function(data) {
-      //   this.setState({repos.data})
-      // }
+      data: {
+        user: term
+      },
+      success: function(data) {
+        console.log('Successful ajax request!')
+        //this.state.setState({repos: data})
+      }
     })
-    .then(data => {
-      console.log(data);
-      this.setState({repos: data.repos})
-    })
+    // .then(data => {
+    //   console.log(data);
+    //   this.setState({repos: data.repos})
+    // })
   }
 
   render () {

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+mongoose.connect('mongodb://localhost/fetcher', { useNewUrlParser: true, useUnifiedTopology: true });
 
 let repoSchema = mongoose.Schema({
   // TODO: your schema here!
@@ -19,6 +19,7 @@ let save = (repos) => {
   // the MongoDB
   for (var i = 0; i < repos.length; i++) {
     var repo = repos[i];
+    console.log(repo.name)
     var newRepo = new Repo({
       repo_id: repo.id,
       repo_url: repo.html_url,
@@ -27,14 +28,13 @@ let save = (repos) => {
       user_name: repo.owner.login,
       stargazers_count: repo.stargazers_count
     })
-    .then((savedRepo) => {
-      //use the retured user document for something?
-      res.redirect("/");
+    newRepo.save((err) => {
+      if (err) {
+        console.log('err')
+      } else {
+        console.log('Repo successfully saved to db')
+      }
     })
-    .catch((error) => {
-      console.log(err);
-      res.send(400, "Repo could not be saved");
-    });
   }
 }
 
