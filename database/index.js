@@ -38,4 +38,10 @@ let save = (repos) => {
   }
 }
 
+let getRepos = () => {
+  return Repo.find({}).sort({ 'stargazers_count': -1 }).limit(25)
+}
+
+
 module.exports.save = save;
+module.exports.getRepos = getRepos;

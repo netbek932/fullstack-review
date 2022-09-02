@@ -13,9 +13,24 @@ class App extends React.Component {
     this.search = this.search.bind(this);
   }
 
+  componentDidMount() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    $.ajax({
+      url: '/repos',
+      type: 'GET',
+      success: function(data) {
+        console.log('Successful GET request!')
+        console.log(data)
+        this.setState({repos: data})
+      }
+    })
+  }
+
   search (term) {
     console.log(`${term} was searched`);
-
     $.ajax({
       url: '/repos',
       type: 'POST',
@@ -27,10 +42,6 @@ class App extends React.Component {
         //this.state.setState({repos: data})
       }
     })
-    // .then(data => {
-    //   console.log(data);
-    //   this.setState({repos: data.repos})
-    // })
   }
 
   render () {

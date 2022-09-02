@@ -2,6 +2,8 @@ const express = require('express');
 let app = express();
 const { getReposByUsername } = require('../helpers/github');
 const { save } = require('../database/index');
+const { getRepos } = require('../database/index');
+const { Repo } = require('../database/index');
 
 app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.urlencoded({extended: true}));
@@ -27,6 +29,11 @@ app.post('/repos', function (req, res) {
 app.get('/repos', function (req, res) {
   // TODO - your code here!
   // This route should send back the top 25 repos
+  //console.log('In the get request')
+  getRepos()
+  .then((repos) => {
+    res.send(JSON.stringify(repos))
+  })
 });
 
 let port = 1128;
