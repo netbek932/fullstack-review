@@ -21,11 +21,17 @@ class App extends React.Component {
     $.ajax({
       url: '/repos',
       type: 'GET',
-      success: function(data) {
-        console.log('Successful GET request!')
-        console.log(data)
-        this.setState({repos: data})
-      }
+      // success: function(data) {
+      //   console.log('Successful GET request!')
+      //   var fetchedData = JSON.parse(data);
+      //   console.log(fetchedData)
+      //   this.setState({repos: fetchedData})
+      // }
+    })
+    .then((data) => {
+      var fetchedData = JSON.parse(data);
+        this.setState({repos: fetchedData})
+        console.log(this.state.repos);
     })
   }
 

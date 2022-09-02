@@ -3,7 +3,10 @@ import React from 'react';
 const RepoList = (props) => (
   <div>
     <h4> Repo List Component </h4>
-    There are {props.repos.length} repos.
+    There are {props.repos.length} repos:
+    <ul>
+      {props.repos.map((repo) => <li key={repo.repo_id}>{repo.repo_name} </li>)}
+    </ul>
   </div>
 )
 
