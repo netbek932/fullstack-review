@@ -42,11 +42,10 @@ class App extends React.Component {
       type: 'POST',
       data: {
         user: term
-      },
-      success: function(data) {
-        console.log('Successful ajax request!')
-        //this.state.setState({repos: data})
       }
+    })
+    .then((data) => {
+      this.fetchData();
     })
   }
 
